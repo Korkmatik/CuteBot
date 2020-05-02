@@ -202,3 +202,6 @@ dmypy.json
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/CuteBot.iml
 .idea/.gitignore
+
+token.txt
+mySpecials.py
