@@ -19,7 +19,7 @@
 import discord
 import logging
 
-from helpers import read_secrets, get_random_compliment
+from helpers import read_secrets, get_random_compliment, get_random_itachi_quote
 
 # Channel ID of the Text Channel dedicated to the Cute Bot
 from mySpecials import get_cute_bot_channel_id
@@ -93,6 +93,8 @@ class CuteBot(discord.Client):
                 await message.channel.send("Sorry, the force isn't with me. I was not able to make you cute ... (っ °Д °;)っ")
         elif message.content == "!makemehappy":
             await message.channel.send(get_random_compliment())
+        elif message.content == "!itachi":
+            await message.channel.send(get_random_itachi_quote())
         elif message.content == "!help":
             embed = discord.Embed(title=f"Help", description="Commands which I understand")
             embed.add_field(name="!hello", value="I will greet you!")
@@ -100,6 +102,7 @@ class CuteBot(discord.Client):
             embed.add_field(name="!stats", value="I will show your stats!")
             embed.add_field(name="!cute", value="I will make you cute!")
             embed.add_field(name="!makemehappy", value="I will make you happy!")
+            embed.add_field(name="!itachi", value="Just use it if you want to read a great quote!")
             await message.channel.send(content=None, embed=embed)
 
     async def on_member_join(self, member):

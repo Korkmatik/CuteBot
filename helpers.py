@@ -20,7 +20,7 @@
 import random
 
 from mySpecials import compliments # List of strings with compliments
-
+from mySpecials import itachi_quotes # List of strings with itachi's quotes
 
 def read_secrets():
     """
@@ -40,3 +40,8 @@ def read_secrets():
 def get_random_compliment():
     index = random.randint(0, len(compliments)-1)
     return compliments[index]
+
+
+def get_random_itachi_quote():
+    index = random.randint(0, len(itachi_quotes) - 1)
+    return itachi_quotes[index]
