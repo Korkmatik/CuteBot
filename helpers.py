@@ -22,6 +22,7 @@ import random
 from mySpecials import compliments # List of strings with compliments
 from mySpecials import itachi_quotes # List of strings with itachi's quotes
 
+
 def read_secrets():
     """
     File format:
