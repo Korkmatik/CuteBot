@@ -1,17 +1,18 @@
 # CuteBot
 CuteBot is a bot which improves our discord server. To interact easily with the discord API I have used ["discord.py"](https://discordpy.readthedocs.io/en/latest/).
 
-CuteBot can be used to play games or just to have some fun.
+CuteBot can be used to play games or just to have some fun. Every game needs a seperate Text Channel. Furthermore a Text Channel only for the CuteBot is needed.
 
-# Commands
+# Commands in the CuteBot Text Channel
 ![Screenshot where the CuteBot help menu is displayed](.doc/Screenshots/CuteBot/Help.png)
 
-# Screenshots
+# Screenshots from the CuteBot Text Channel
 ![Screenshot where the CuteBot greets someone](.doc/Screenshots/CuteBot/Hello_Command.png)
 
 # Games
 
 ## Hangman
+You will need a seperate text channel for this game. (e.g. "Hangman")
 
 ### Commands
 ```
