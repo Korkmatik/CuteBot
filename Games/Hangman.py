@@ -133,6 +133,7 @@ class Hangman:
             msg += "!stop                 Stops a running game\n"
             msg += "!letter [char]        Type this during a running game if you want to try a letter\n"
             msg += "!word [word]          Type this during a running game if you want to try a word\n"
+            msg += "!help                 Prints this help menu\n"
 
             msg += "```"
 

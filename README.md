@@ -24,6 +24,7 @@ The Hangman Game:
 !stop                 Stops a running game
 !letter [char]        Type this during a running game if you want to try a letter
 !word [word]          Type this during a running game if you want to try a word
+!help                 Prints this help menu
 ```
 
 ### Screenshots
