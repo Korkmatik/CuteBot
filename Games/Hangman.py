@@ -1,9 +1,9 @@
 import random
 
+from discord.utils import escape_markdown, escape_mentions
 
 class Hangman:
 
-    HANGMAN_PIC = ""
     IS_RUNNING = False
 
     HANGMAN_WORD = ""
@@ -17,32 +17,54 @@ class Hangman:
 
     @staticmethod
     def get_message(command):
+        # Escaping user input
+        command = escape_markdown(command)
+        command = escape_mentions(command)
+
         if "!start" in command.lower():
             if not Hangman.IS_RUNNING:
-                wordlist = command.lower().split()[1]
+                wordlist = command.lower().split()
+                if len(wordlist) < 2:
+                    return "You didn't specify a wordlist (＃°Д°)"
+
+                wordlist = wordlist[1]
+
                 if wordlist not in Hangman.WORDLISTS:
                     return "I could not find the specified wordlist. Enter `!wordlists` to see all available wordlists"
 
                 return Hangman.__start(wordlist)
             else:
-                return "A game is currently running. Type `!restart` to restart the game."
+                return "A game is currently running. Type `!restart [wordlist]` to restart the game."
         elif "!restart" in command.lower():
             if not Hangman.IS_RUNNING:
-                return "No game is currently running. Type `!start` to start a new game."
+                return "No game is currently running. Type `!start [wordlist]` to start a new game."
 
-            wordlist = command.lower().split()[1]
+            wordlist = command.lower().split()
+
+            if len(wordlist) < 2:
+                return "You didn't specify a wordlist (＃°Д°)"
+
+            wordlist = wordlist[1]
+
             if wordlist not in Hangman.WORDLISTS:
                 return "I could not find the specified wordlist. Enter `!wordlists` to see all available wordlists"
 
             return Hangman.__start(wordlist)
         elif command == "!stop":
+            if not Hangman.IS_RUNNING:
+                return "You can't stop a game that isn't running! (ง •_•)ง"
+
             Hangman.IS_RUNNING = False
             return "Game stopped."
         elif "!letter" in command.lower():
             if not Hangman.IS_RUNNING:
-                return "The game is not running! Please start the game! (Command: `!start`)"
+                return "The game is not running! Please start the game! (Command: `!start [wordlist]`)"
 
-            letter = command.lower().split()[1]
+            letter = command.lower().split()
+            if len(letter) < 2:
+                return "You didn't specify a letter! ￣へ￣"
+
+            letter = letter[1]
             if len(letter) > 1:
                 return "This is not a letter!"
 
@@ -68,9 +90,14 @@ class Hangman:
             return msg
         elif "!word" in command.lower():
             if not Hangman.IS_RUNNING:
-                return "The game is not running! Please start the game! (Command: `!start`)"
+                return "The game is not running! Please start the game! (Command: `!start [wordlist]`)"
 
-            word = command.lower().split()[1]
+            word = command.lower().split()
+
+            if len(word) < 2:
+                return "You didn't specify a word! （︶^︶）"
+
+            word = word[1]
 
             if word == Hangman.HANGMAN_WORD:
                 for l in word:
@@ -96,6 +123,8 @@ class Hangman:
     def __start(wordlist):
         Hangman.HANGMAN_PIC = ""
         Hangman.IS_RUNNING = True
+        Hangman.WRONG = []
+        Hangman.CORRECT = []
 
         if wordlist == "programming":
             Hangman.HANGMAN_WORD = random.choice(programming_words)
@@ -137,7 +166,7 @@ class Hangman:
         if len(Hangman.CORRECT) >= len(set(Hangman.HANGMAN_WORD)):
             Hangman.IS_RUNNING = False
             msg += "\n\nYOU WON!"
-        elif len(Hangman.WRONG) == len(HANGMAN_PICTURES):
+        elif len(Hangman.WRONG) >= (len(HANGMAN_PICTURES) - 1):
             Hangman.IS_RUNNING = False
             msg += "\n\nGAME OVER!"
             msg += f"\nThe word was: {Hangman.HANGMAN_WORD}"
