@@ -48,6 +48,9 @@ class CuteBot(discord.Client):
         logging.debug("Connected")
 
     async def on_message(self, message):
+        message.content = discord.utils.escape_mentions(message.content)
+        message.content = discord.utils.escape_markdown(message.content)
+
         if message.author == self.user:
             return
 
